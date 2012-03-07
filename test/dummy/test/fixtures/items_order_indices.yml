@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  model_name: MyString
+  item_id: 1
+  item_index: 1
+
+two:
+  model_name: MyString
+  item_id: 1
+  item_index: 1
