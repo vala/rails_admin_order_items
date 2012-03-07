@@ -7,8 +7,8 @@ require "rails_admin_order_items/version"
 Gem::Specification.new do |s|
   s.name        = "rails_admin_order_items"
   s.version     = RailsAdminOrderItems::VERSION
-  s.authors     = ["TODO: Valentin Ballestrino"]
-  s.email       = ["TODO: vala@glyph.fr"]
+  s.authors     = ["Valentin Ballestrino"]
+  s.email       = ["vala@glyph.fr"]
   s.homepage    = "http://github.com/vala/rails_admin_order_items"
   s.summary     = "Rails admin plugin giving the ability to easily reorder items in the list view table"
   s.description = "Rails admin plugin giving the ability to easily reorder items in the list view table"
