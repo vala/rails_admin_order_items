@@ -1,0 +1,11 @@
+en:
+  admin:
+    actions:
+      order_items:
+        title: "Reorder Items"
+        menu: "Reorder %{model_label_plural}"
+        breadcrumb: "Reorder %{model_label_plural}"
+        link: "Reorder %{model_label_plural}"
+        bulk_link: "Reorder Items selected %{model_label_plural}"
+        done: "%{model_label_plural} reordered !"
+        column_title: "Order Index"
