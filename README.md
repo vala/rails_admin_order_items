@@ -10,6 +10,14 @@ In your Gemfile :
 gem "rails_admin_order_items", :git => "git@github.com:vala/rails_admin_order_items.git"
 ```
 
+Bundle and install migration and migrate :
+
+```bash
+bundle install
+rake rails_admin_order_items_engine:install:migrations
+rake db:migrate
+```
+
 In your Rails Admin initializer : config/initializers/rails_admin.rb
 
 ```ruby
