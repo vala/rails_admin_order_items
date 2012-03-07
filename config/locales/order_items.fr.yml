@@ -1,0 +1,11 @@
+en:
+  admin:
+    actions:
+      order_items:
+        title: "Réordonner Items"
+        menu: "Réordonner %{model_label_plural}"
+        breadcrumb: "Réordonner %{model_label_plural}"
+        link: "Réordonner %{model_label_plural}"
+        bulk_link: "Réordonner les %{model_label_plural} sélectionnés"
+        done: "%{model_label_plural} réordonnés !"
+        column_title: "Position"

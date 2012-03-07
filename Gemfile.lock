@@ -19,7 +19,7 @@ PATH
   remote: .
   specs:
     rails_admin_order_items (0.0.1)
-      rails (~> 3.2.1)
+      rails (~> 3.1)
 
 GEM
   remote: http://rubygems.org/
