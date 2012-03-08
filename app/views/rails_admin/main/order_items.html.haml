@@ -57,7 +57,7 @@
       cursor: grabbed;
     }
 
-#order_items{:'data-pjax-container' => true}
+#order_items{:data => {:"pjax-container" => true}}
   = form_tag bulk_action_path(:model_name => @abstract_model.to_s), :method => :post, :id => "bulk_form", :class => "form" do
     = hidden_field_tag :bulk_action
     %table.table.table-condensed.table-striped

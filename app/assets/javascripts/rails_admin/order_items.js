@@ -15,7 +15,6 @@
 	
 	function RailsAdminOrderItems($elem, args) {
 		this.options = typeof args === 'Object' ? $.merge({}, defaults, args) : defaults;
-		this.index_offset = parseInt(args.start_index, 10);
 		this.elem = $elem;
 		this.model_name = args.model_name;
 		this.init();
@@ -27,6 +26,8 @@
 			
 			this.list = this.elem.find('#bulk_form table tbody');
 			this.list_rows = this.list.find('tr');
+			this.index_offset = parseInt(this.list_rows.find('input.order_index_input:eq(0)').val(), 10) - 1;
+			console.log("New start index : " + this.list_rows.find('input.order_index_input:eq(0)').val());
 			
 			this.list.sortable({
 				update: function() {
@@ -38,9 +39,10 @@
      			self.onOrderInputUpdated(e, this);
 				});
 				
-			$('#order_items')
+			$(document)
 				.live('pjax:complete', function() {
 					setTimeout(function() {
+						console.log('pjax complete !');
 						self.init();	
 					}, 1000);
 				});
@@ -119,7 +121,6 @@ $(function() {
 	if($list.length > 0)
 		$list
 			.railsAdminOrderItems({
-				model_name : $infos.data('model_name'),
-				start_index : $infos.data('start_index')
+				model_name : $infos.data('model_name')
 			});
 });
