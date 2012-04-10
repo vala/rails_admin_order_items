@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Valentin Ballestrino"]
   s.email       = ["vala@glyph.fr"]
   s.homepage    = "http://github.com/vala/rails_admin_order_items"
-  s.summary     = "Rails admin plugin giving the ability to easily reorder items in the list view table"
-  s.description = "Rails admin plugin giving the ability to easily reorder items in the list view table"
+  s.summary     = "Rails admin custom action for items reordering"
+  s.description = "Rails admin custom action that gives you the ability to reorder your items at the list level within a \"Reorder\" tab"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
 
