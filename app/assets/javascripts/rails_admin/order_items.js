@@ -1,6 +1,9 @@
 // Our items ordering plugin
 ;(function($) {
 	
+	// Memoize $('body')
+	var $body = $('body');
+	
 	var defaults = {};
 	
 	// Helper to find first object in ary that f evaluates to true
@@ -26,8 +29,11 @@
 			
 			this.list = this.elem.find('#bulk_form table tbody');
 			this.list_rows = this.list.find('tr');
+			
+			// Return if no order_index to process
+			if(!this.list_rows.find('input.order_index_input:eq(0)').val()) return;
+			
 			this.index_offset = parseInt(this.list_rows.find('input.order_index_input:eq(0)').val(), 10) - 1;
-			console.log("New start index : " + this.list_rows.find('input.order_index_input:eq(0)').val());
 			
 			this.list.sortable({
 				update: function() {
@@ -38,16 +44,8 @@
 				.bind('keypress', function(e) {
      			self.onOrderInputUpdated(e, this);
 				});
-				
-			$(document)
-				.live('pjax:complete', function() {
-					setTimeout(function() {
-						console.log('pjax complete !');
-						self.init();	
-					}, 1000);
-				});
 		},
-		
+				
 		onOrderInputUpdated : function(e, el) {
 			// If key is not enter
 			if(e.which !== 13)
@@ -109,6 +107,7 @@
 	};
 	
 	$.fn.railsAdminOrderItems = function(args) {
+		// Init new plugin
 		new RailsAdminOrderItems(this, args);
 	};
 })(jQuery);
