@@ -42,19 +42,16 @@ module RailsAdmin
               end
             end
 
-
             @objects ||= list_entries
             @ordered_items = RailsAdminOrderItems::Models::ItemsOrderIndex.get_ordered_items(@abstract_model.to_param.camelize.constantize, 'ASC', :page => (params[:page] || 1).to_i, :per => (params[:per] || @model_config.list.items_per_page).to_i)
 
             respond_to do |format|
               format.html do
-                render @action.template_name, :layout => !request.xhr?, :status => (flash[:error].present? ? :not_found : 200)
+                render @action.template_name, :status => (flash[:error].present? ? :not_found : 200)
               end
             end
           end
-        end
-
-        
+        end        
       end
     end
   end
