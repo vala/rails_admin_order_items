@@ -7,7 +7,7 @@ module RailsAdminOrderItems
           # Get the model name
           model_name = model.to_s
           # Sort the whole model entries if not every record is found
-          self.sort_model! model if model.count > ActiveRecord::Base.connection.execute("SELECT COUNT(*) FROM 'items_order_indices' WHERE 'model_name'='#{model_name}'").first.first
+          self.sort_model! model if model.count > ActiveRecord::Base.connection.execute("SELECT COUNT(*) FROM items_order_indices WHERE model_name='#{model_name}'").first.first
           # Find all items from the desired model ordered by their 'item_index'
           mdls = self.get_items(model, direction, options)
         end
@@ -26,12 +26,12 @@ module RailsAdminOrderItems
           # Get the model name
           model_name = model.to_s
           # Get all yet ordered ids in our order table
-          ids_in_table = ActiveRecord::Base.connection.execute("SELECT 'item_id' FROM 'items_order_indices' WHERE 'model_name'='#{model_name}'").map {|a| a[0]}
+          ids_in_table = ActiveRecord::Base.connection.execute("SELECT 'item_id' FROM items_order_indices WHERE 'model_name'='#{model_name}'").map {|a| a[0]}
 
           order_list.each do |item|
             # Update item index if id already in table
             if ids_in_table.include?(item[:id].to_i)
-              ActiveRecord::Base.connection.execute("UPDATE 'items_order_indices' SET 'item_index'=#{item[:index]} WHERE 'model_name'='#{model_name}' AND 'item_id'='#{item[:id]}'")
+              ActiveRecord::Base.connection.execute("UPDATE items_order_indices SET 'item_index'=#{item[:index]} WHERE 'model_name'='#{model_name}' AND 'item_id'='#{item[:id]}'")
             # If the item does not exist, insert it
             else
               ActiveRecord::Base.connection.execute("INSERT INTO items_order_indices ('model_name', 'item_id', 'item_index') VALUES ('#{model_name}', '#{item[:id]}', '#{item[:index]}')")
@@ -57,7 +57,7 @@ module RailsAdminOrderItems
           options = {:page => 0, :per => 40}.merge user_options
           model_name = model.to_s
           limit_statement = options[:page] > 0 ? " LIMIT #{options[:per] * (options[:page] - 1)},#{options[:per]}" : ''
-          model.find_by_sql("SELECT '#{model.table_name}'.* FROM '#{model.table_name}' LEFT JOIN 'items_order_indices' ON '#{model.table_name}'.id='items_order_indices'.item_id WHERE 'model_name'='#{model_name}' AND '#{Time.now.to_f}' > 0 ORDER BY 'items_order_indices'.item_index #{direction}#{limit_statement}")
+          model.find_by_sql("SELECT #{model.table_name}.* FROM #{model.table_name} LEFT JOIN items_order_indices ON #{model.table_name}.id=items_order_indices.item_id WHERE 'model_name'='#{model_name}' AND '#{Time.now.to_f}' > 0 ORDER BY items_order_indices.item_index #{direction}#{limit_statement}")
         end
       end
     end
